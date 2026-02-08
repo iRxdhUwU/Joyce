@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Encantos da Joyce | Cardápio Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#FFF9FA] antialiased">
+
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 px-4 md:px-8 py-3 shadow-sm border-b border-pink-100">
+        <div class="max-w-6xl mx-auto flex justify-between items-center relative">
+            <div class="hidden lg:block text-pink-200"><i class="fas fa-cookie-bite text-2xl"></i></div>
+            <div class="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[250px] md:max-w-none">
+                <h1 class="font-logo text-3xl md:text-5xl text-pink-500 drop-shadow-sm whitespace-nowrap">Encantos da Joyce</h1>
+            </div>
+            <div id="cart-btn" class="relative cursor-pointer bg-pink-500 p-3 rounded-2xl text-white shadow-lg transition-all active:scale-90 ml-auto" onclick="toggleCart()">
+                <i class="fas fa-shopping-basket text-lg"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-[#3d1d11] text-white text-[10px] font-bold w-6 h-6 flex items-center justify-center rounded-full hidden border-2 border-white">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 md:pt-40 pb-8 text-center px-4">
+        <div class="inline-flex items-center gap-2 p-2 px-5 rounded-full bg-pink-100 text-pink-600 text-[10px] font-bold uppercase tracking-widest mb-4">
+            <i class="fas fa-motorcycle"></i> Delivery: 18:00 às 23:00
+        </div>
+        <h2 class="text-gray-700 text-xl md:text-2xl font-light italic">Doces que transformam o seu dia</h2>
+    </header>
+
+    <main class="px-4 md:px-8 pb-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto" id="lista-produtos"></main>
+
+    <div id="cart-drawer" class="fixed inset-0 bg-black/60 z-[60] hidden backdrop-blur-sm">
+        <div class="absolute right-0 top-0 h-full w-full sm:w-[450px] bg-white shadow-2xl flex flex-col p-5 animate-slide-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-logo text-4xl text-pink-500">Minha Sacola</h3>
+                <button onclick="toggleCart()" class="text-gray-300 hover:text-pink-500 text-4xl">&times;</button>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-y-auto pr-1 custom-scroll"></div>
+
+            <div class="border-t pt-4 mt-4 space-y-3">
+                <input type="text" id="nome-cliente" oninput="validarForm()" placeholder="👤 Seu nome" class="input-joyce">
+                <input type="text" id="rua-numero" oninput="validarForm()" placeholder="📍 Rua e Número" class="input-joyce">
+                <input type="text" id="referencia" placeholder="🏠 Ponto de referência" class="input-joyce">
+                <select id="select-bairro" onchange="validarForm(); renderCart();" class="input-joyce">
+                    <option value="0">Escolha o Bairro (Frete)</option>
+                    <option value="5">Centro - R$ 5,00</option>
+                    <option value="8">Bairros Próximos - R$ 8,00</option>
+                    <option value="12">Bairros Afastados - R$ 12,00</option>
+                </select>
+                <div class="p-4 bg-pink-50 rounded-2xl flex justify-between items-center border border-pink-100">
+                    <span class="text-gray-500 text-sm font-medium">Total:</span>
+                    <span id="total-valor" class="text-2xl font-bold text-pink-600">R$ 0,00</span>
+                </div>
+                <button id="btn-enviar" disabled onclick="enviarPedido()" class="w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all bg-gray-200 text-gray-400 cursor-not-allowed shadow-md">
+                    <i class="fab fa-whatsapp text-xl"></i> Finalizar no WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
